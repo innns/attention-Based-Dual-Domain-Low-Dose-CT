@@ -1,7 +1,5 @@
-
 from model.Transformer_CNN_model import TransformerModel
-from model.Unet_CTmodel import UnetModel
-
+from model.Unet_CT_model import UnetModel
 from model.GAM_model import GAM_Attention
 from skimage.metrics import structural_similarity as s_ssim
 import tensorflow as tf
