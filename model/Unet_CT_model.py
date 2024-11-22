@@ -74,7 +74,7 @@ class UnetModel(tf.keras.Model):
             tf.keras.layers.Conv2D(1, 1, padding="same", activation=tf.nn.leaky_relu)
         )
 
-    def call(self, train_batch, training=False):  # 定义正向传播过程
+    def call(self, train_batch, training=False):  # forward propagation
         # extend input for sinLayer
         if training:
             ct_in = train_batch[0]
@@ -104,7 +104,7 @@ class UnetModel(tf.keras.Model):
         exp4 = tf.concat([exp4, input_block], axis=3)
         exp4 = self.ExpansivePathLayer[5](exp4)
 
-        ct_out = ct_in - self.ExpansivePathLayer[6](exp4)  # 最终输出
+        ct_out = ct_in - self.ExpansivePathLayer[6](exp4)  # output
 
         model_out = [ct_out, ct_in]
         if training:

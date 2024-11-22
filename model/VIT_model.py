@@ -57,7 +57,7 @@ class Attention(tf.keras.layers.Layer):
 
     def call(self, inputs):
         # -----------------------------------------------#
-        #   获得batch_size
+        #   get batch_size
         # -----------------------------------------------#
         bs = tf.shape(inputs)[0]
         # -----------------------------------------------#
@@ -69,7 +69,7 @@ class Attention(tf.keras.layers.Layer):
         # -----------------------------------------------#
         inputs = tf.transpose(inputs, [2, 0, 3, 1, 4])
         # -----------------------------------------------#
-        #   将query, key, value划分开
+        #   split query, key, value
         #   query     b, 12, 197, 64
         #   key       b, 12, 197, 64
         #   value     b, 12, 197, 64
@@ -80,7 +80,7 @@ class Attention(tf.keras.layers.Layer):
         # -----------------------------------------------#
         score = tf.matmul(query, key, transpose_b=True)
         # -----------------------------------------------#
-        #   进行数量级的缩放
+        #   scale
         # -----------------------------------------------#
         scaled_score = score / tf.math.sqrt(tf.cast(self.projection_dim, score.dtype))
         # -----------------------------------------------#
@@ -212,7 +212,7 @@ class TransformerModel(tf.keras.Model):
         self.trainMode = None
         self.trainable_var = []
 
-    def call(self, train_batch, training=False):  # 定义正向传播过程
+    def call(self, train_batch, training=False):  # forward propagation
         if training:
             sin_in = train_batch[0]
         else:

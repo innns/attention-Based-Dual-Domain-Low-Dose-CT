@@ -19,7 +19,7 @@ class Attention(tf.keras.layers.Layer):
 
     def call(self, inputs):
         # -----------------------------------------------#
-        #   获得batch_size
+        #   get batch_size
         # -----------------------------------------------#
         bs = tf.shape(inputs)[0]
         # -----------------------------------------------#
@@ -31,7 +31,7 @@ class Attention(tf.keras.layers.Layer):
         # -----------------------------------------------#
         inputs = tf.transpose(inputs, [2, 0, 3, 1, 4])
         # -----------------------------------------------#
-        #   将query, key, value划分开
+        #   split query, key, value
         #   query     b, 8, 180, 54
         #   key       b, 8, 180, 54
         #   value     b, 8, 180, 54
@@ -42,7 +42,7 @@ class Attention(tf.keras.layers.Layer):
         # -----------------------------------------------#
         score = tf.matmul(query, key, transpose_b=True)
         # -----------------------------------------------#
-        #   进行数量级的缩放
+        #   scale
         # -----------------------------------------------#
         scaled_score = score / tf.math.sqrt(tf.cast(self.projection_dim, score.dtype))
         # -----------------------------------------------#
@@ -191,7 +191,7 @@ class TransformerModel(tf.keras.Model):
         self.trainMode = None
         self.trainable_var = []
 
-    def call(self, train_batch, training=False):  # 定义正向传播过程
+    def call(self, train_batch, training=False):  # forward propagation
         if training:
             sin_in = train_batch[0]
         else:
@@ -302,7 +302,8 @@ class FbpLayer(tf.keras.layers.Layer):
             _rawAT["arr_0"].astype("int32"),
             _rawAT["arr_1"].astype("float32"),
             _rawAT["arr_2"],
-        )  # 使用index,val,shape构建稀疏反投影矩阵 #!!!!!!!!!!!!!!!!!!!!!!1
+        )
+        # build back projection matrix by index, val and shape
         # self.A_Matrix = tf.sparse.transpose(_AT)
         self.A_Matrix = _AT
         _out_sz = round(np.sqrt(float(self.A_Matrix.shape[1])))
