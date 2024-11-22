@@ -4,9 +4,9 @@ this paper introduces a new sparse-view CT reconstruction method that combines a
 # Env
 
 ```
-conda create -n tf23_py38 python=3.8
+conda create -n tf25_py38 python=3.8
 
-pip install tensorflow==2.3 skimage -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install -r requirements.txt
 
 ```
 
