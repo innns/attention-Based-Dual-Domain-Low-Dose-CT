@@ -1,0 +1,11 @@
+keras-nightly==2.5.0.dev2021032900
+Keras-Preprocessing==1.1.2
+notebook==6.4.4
+numpy==1.20.0
+tensorboard==2.6.0
+tensorboard-data-server==0.6.1
+tensorboard-plugin-wit==1.8.0
+tensorflow-estimator==2.5.0
+tensorflow-gpu @ https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-2.5.0-cp38-cp38-manylinux2010_x86_64.whl
+opencv-python
+scikit-image==0.18.3

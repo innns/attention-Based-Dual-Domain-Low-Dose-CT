@@ -1,7 +1,5 @@
-
 from model.Transformer_CNN_model import TransformerModel
-from model.Unet_CTmodel import UnetModel
-
+from model.Unet_CT_model import UnetModel
 from model.GAM_model import GAM_Attention
 from skimage.metrics import structural_similarity as s_ssim
 import tensorflow as tf
@@ -188,8 +186,12 @@ def compute_psnr(data_batch, model_out):
     sin_interp_large = ShuffleSino(sin_interp,sin_in)
 
     # psnr for sin_in vs sin_label, sin_out vs sin_label, fbp_out vs ct_label, ct_out vs ct_label
-    return [  psnr(sin_label_large, sin_interp_large),psnr(sin_label_large, sin_out_large),psnr(ct_label,fbp_out),
-              psnr(ct_label, ct_in),psnr(ct_label, ct_out),psnr(ct_label,fusion_out)]
+    return [psnr(sin_label_large, sin_interp_large),
+            psnr(sin_label_large, sin_out_large),
+            psnr(ct_label,fbp_out),
+            psnr(ct_label, ct_in),
+            psnr(ct_label, ct_out), 
+            psnr(ct_label,fusion_out)]
 
 
 def compute_ssim(data_batch, model_out):
